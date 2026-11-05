@@ -30,7 +30,6 @@ export const landingNavLinks = [
   { id: "beneficios", label: "Benefícios" },
   { id: "como-funciona", label: "Como funciona" },
   { id: "funcionalidades", label: "Funcionalidades" },
-  { id: "comecar", label: "Começar" },
 ];
 
 export const landingHero = {

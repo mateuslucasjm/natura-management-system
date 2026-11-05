@@ -1,3 +1,4 @@
+import { landingPageFontSx } from "@/components/Landing/landingStyles";
 import { Box } from "@mui/material";
 import type { ReactNode } from "react";
 import LandingFooter from "./LandingFooter";
@@ -15,12 +16,15 @@ export default function LandingLayout({ children }: LandingLayoutProps) {
         display: "flex",
         flexDirection: "column",
         bgcolor: "background.default",
+        ...landingPageFontSx,
       }}
     >
       <LandingHeader />
+
       <Box component="main" sx={{ flex: 1 }}>
         {children}
       </Box>
+
       <LandingFooter />
     </Box>
   );

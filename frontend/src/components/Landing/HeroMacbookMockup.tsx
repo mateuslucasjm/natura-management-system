@@ -1,20 +1,9 @@
-import { motion } from "framer-motion";
 import macbookImg from "../../../assets/macbook.png";
-
-const FLOAT_TRANSITION = {
-  duration: 5,
-  repeat: Infinity,
-  ease: "easeInOut" as const,
-};
 
 export default function HeroMacbookMockup() {
   return (
     <div className="relative mx-auto flex w-full justify-center overflow-visible py-12">
-      <motion.div
-        className="relative z-10"
-        animate={{ y: [0, -12, 0] }}
-        transition={FLOAT_TRANSITION}
-      >
+      <div className="relative z-10">
         <div
           className="
             relative
@@ -33,7 +22,7 @@ export default function HeroMacbookMockup() {
             draggable={false}
           />
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

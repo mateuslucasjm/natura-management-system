@@ -1,4 +1,5 @@
 import AccessAccountIcon from "@/components/Landing/AccessAccountIcon";
+import { landingNavLinks } from "@/components/Landing/landingContent";
 import LandingMobileMenu, {
   LandingMenuToggle,
 } from "@/components/Landing/LandingMobileMenu";
@@ -10,7 +11,6 @@ import {
   landingHeaderToolbarSx,
   landingNavButtonSx,
 } from "@/components/Landing/landingStyles";
-import { landingNavLinks } from "@/components/Landing/landingContent";
 import {
   AppBar,
   Box,
@@ -28,22 +28,31 @@ function scrollToSection(id: string, offset: number) {
   const el = document.getElementById(id);
   if (!el) return;
 
-  const top =
-    el.getBoundingClientRect().top + window.scrollY - offset;
+  const top = el.getBoundingClientRect().top + window.scrollY - offset;
+
   window.scrollTo({ top, behavior: "smooth" });
 }
 
 export default function LandingHeader() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const scrolled = useScrollTrigger({ disableHysteresis: true, threshold: 24 });
+
+  const scrolled = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 24,
+  });
+
   const headerOffset = getLandingHeaderOffset(scrolled, isMobile);
+
   const toolbarSx = scrolled
     ? landingHeaderToolbarSx.scrolled
     : landingHeaderToolbarSx.hero;
 
-  const toggleMenu = () => setDrawerOpen((prev) => !prev);
+  const toggleMenu = () => {
+    setDrawerOpen((prev) => !prev);
+  };
 
   const navItem = (link: (typeof landingNavLinks)[0]) => (
     <Button
@@ -53,7 +62,10 @@ export default function LandingHeader() {
         color: "text.primary",
         fontWeight: 500,
         fontSize: "1rem",
-        "&:hover": { color: "primary.main", bgcolor: "transparent" },
+        "&:hover": {
+          color: "primary.main",
+          bgcolor: "transparent",
+        },
       }}
     >
       {link.label}
@@ -68,6 +80,11 @@ export default function LandingHeader() {
         color="transparent"
         sx={(theme) => ({
           ...getGlassHeader(theme, scrolled),
+          top: 0,
+          left: 0,
+          right: 0,
+          width: "100%",
+          zIndex: theme.zIndex.appBar,
           transition:
             "background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease",
           boxShadow: getHeaderScrollShadow(theme, scrolled),
@@ -107,7 +124,10 @@ export default function LandingHeader() {
                 component="img"
                 src="/logo-natura.png"
                 alt="Natura App"
-                sx={{ height: isMobile ? 38 : 40, width: "auto" }}
+                sx={{
+                  height: isMobile ? 38 : 40,
+                  width: "auto",
+                }}
               />
             </Box>
 
@@ -139,10 +159,14 @@ export default function LandingHeader() {
                     component={RouterLink}
                     to="/auth/login"
                     startIcon={<AccessAccountIcon fontSize="small" />}
-                    sx={landingNavButtonSx}
+                    sx={{
+                      ...landingNavButtonSx,
+                      borderRadius: 5,
+                    }}
                   >
                     Acessar conta
                   </Button>
+
                   <Button
                     component={RouterLink}
                     to="/auth/register"
@@ -151,8 +175,8 @@ export default function LandingHeader() {
                     disableElevation
                     sx={(theme) => ({
                       fontWeight: 600,
-                      px: 2.5,
-                      fontSize: "1rem",
+                      display: { xs: "none", sm: "inline-flex" },
+                      borderRadius: 5,
                       ...getPrimaryButtonShadow(theme),
                     })}
                   >
@@ -178,6 +202,7 @@ export default function LandingHeader() {
                   >
                     Criar conta
                   </Button>
+
                   <LandingMenuToggle open={drawerOpen} onToggle={toggleMenu} />
                 </>
               )}

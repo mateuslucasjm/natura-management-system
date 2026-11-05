@@ -23,6 +23,7 @@ export default function BenefitsSection() {
           <Grid container spacing={3}>
             {landingBenefits.map((benefit) => {
               const Icon = benefit.icon;
+
               return (
                 <Grid key={benefit.title} size={{ xs: 12, sm: 6, md: 4 }}>
                   <StaggerItem sx={{ height: "100%" }}>
@@ -42,10 +43,28 @@ export default function BenefitsSection() {
                       >
                         <Icon />
                       </Box>
-                      <Typography variant="h6" fontWeight={700} gutterBottom>
+
+                      <Typography
+                        variant="h6"
+                        fontWeight={600}
+                        gutterBottom
+                        sx={{
+                          fontSize: "1rem",
+                          letterSpacing: "-0.015em",
+                        }}
+                      >
                         {benefit.title}
                       </Typography>
-                      <Typography variant="body2" color="text.secondary" lineHeight={1.7}>
+
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{
+                          fontSize: "0.85rem",
+                          fontWeight: 400,
+                          lineHeight: 1.6,
+                        }}
+                      >
                         {benefit.description}
                       </Typography>
                     </LandingCard>

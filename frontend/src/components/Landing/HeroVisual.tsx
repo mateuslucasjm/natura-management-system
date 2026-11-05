@@ -67,9 +67,7 @@ export default function HeroVisual() {
       <Box
         component={motion.div}
         animate={
-          isDark
-            ? { scale: [1, 1.04, 1], opacity: [0.5, 0.7, 0.5] }
-            : undefined
+          isDark ? { scale: [1, 1.04, 1], opacity: [0.5, 0.7, 0.5] } : undefined
         }
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         sx={getHeroPulseGlowSx(theme)}
@@ -92,7 +90,9 @@ export default function HeroVisual() {
         }}
       >
         <Box sx={getHeroCenterCircleSx(theme)}>
-          <TrendingUpIcon sx={{ fontSize: { xs: 48, md: 64 }, color: "primary.main" }} />
+          <TrendingUpIcon
+            sx={{ fontSize: { xs: 48, md: 64 }, color: "primary.main" }}
+          />
         </Box>
 
         {orbitIcons.map(({ Icon, angle }, i) => {
@@ -139,13 +139,32 @@ export default function HeroVisual() {
               ...getHeroFloatingCardSx(theme),
             }}
           >
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 0.5 }}>
+            <Box
+              sx={{ display: "flex", alignItems: "center", gap: 1, mb: 0.5 }}
+            >
               <Icon sx={{ fontSize: 18, color: "primary.main" }} />
-              <Typography variant="caption" color="text.secondary">
+              <Typography
+                variant="caption"
+                color="text.secondary"
+                sx={{
+                  fontSize: "0.68rem",
+                  fontWeight: 400,
+                  letterSpacing: "0",
+                }}
+              >
                 {card.label}
               </Typography>
             </Box>
-            <Typography variant="subtitle2" fontWeight={700} color="primary.main">
+            <Typography
+              variant="subtitle2"
+              fontWeight={400}
+              color="primary.main"
+              sx={{
+                fontSize: "0.78rem",
+                fontWeight: 400,
+                letterSpacing: "0",
+              }}
+            >
               {card.value}
             </Typography>
           </Box>

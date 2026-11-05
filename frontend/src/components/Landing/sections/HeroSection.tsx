@@ -43,7 +43,6 @@ export default function HeroSection() {
         boxSizing: "border-box",
       })}
     >
-      {/* Blur decorativo no fundo */}
       {isDark && (
         <>
           <Box
@@ -59,6 +58,7 @@ export default function HeroSection() {
               pointerEvents: "none",
             }}
           />
+
           <Box
             sx={{
               position: "absolute",
@@ -81,9 +81,14 @@ export default function HeroSection() {
           position: "relative",
           zIndex: 1,
           width: "100%",
-          pt: { xs: 13, md: 7 },
-          pb: { xs: 6, md: 6 },
-          px: { xs: 2.5, sm: 3, md: 3 },
+          pt: {
+            xs: 16,
+            sm: 18,
+            md: 20,
+            lg: 14,
+          },
+          pb: { xs: 8, md: 8 },
+          px: { xs: 3, sm: 4, md: 4, lg: 3 },
         }}
       >
         <Grid
@@ -108,13 +113,17 @@ export default function HeroSection() {
                 <Typography
                   variant="h2"
                   component="h1"
-                  fontWeight={800}
+                  fontWeight={600}
                   sx={{
                     width: "100%",
-                    fontSize: { xs: "2rem", sm: "2.35rem", md: "2.85rem" },
-                    lineHeight: { xs: 1.2, md: 1.08 },
-                    letterSpacing: "-0.03em",
-                    mb: 2,
+                    fontSize: {
+                      xs: "1.9rem",
+                      sm: "2.2rem",
+                      md: "2.65rem",
+                    },
+                    lineHeight: { xs: 1.2, md: 1.15 },
+                    letterSpacing: "-0.035em",
+                    mb: { xs: 2, md: 2.5 },
                     textWrap: "balance",
                   }}
                 >
@@ -129,10 +138,11 @@ export default function HeroSection() {
                   color="text.secondary"
                   sx={{
                     width: "100%",
-                    mb: 3,
+                    mb: { xs: 3, md: 3.5 },
                     maxWidth: { xs: 480, md: 500 },
                     lineHeight: 1.75,
-                    fontSize: { xs: "1rem", md: "1.08rem" },
+                    fontSize: { xs: "0.95rem", md: "1rem" },
+                    fontWeight: 400,
                     textWrap: "pretty",
                   }}
                 >
@@ -145,25 +155,26 @@ export default function HeroSection() {
                     listStyle: "none",
                     m: 0,
                     p: 0,
-                    mb: 3.5,
+                    mb: { xs: 3.5, md: 4 },
                     width: "100%",
                     maxWidth: 440,
                     display: "flex",
                     flexDirection: "column",
-                    gap: 2,
+                    gap: { xs: 2, md: 2.5 },
                   }}
                 >
                   {landingHeroFeatures.map((feature) => {
                     const Icon = feature.icon;
+
                     return (
                       <Box
                         component="li"
                         key={feature.title}
                         sx={{
                           display: "flex",
-                          gap: 1.5,
+                          gap: 1.75,
                           alignItems: "flex-start",
-                          textAlign: { xs: "left", md: "left" },
+                          textAlign: "left",
                         }}
                       >
                         <Box
@@ -186,18 +197,20 @@ export default function HeroSection() {
                         >
                           <Icon sx={{ fontSize: 20, color: "primary.main" }} />
                         </Box>
+
                         <Box>
                           <Typography
                             variant="subtitle2"
-                            fontWeight={700}
-                            sx={{ mb: 0.25, lineHeight: 1.3 }}
+                            fontWeight={600}
+                            sx={{ mb: 0.4, lineHeight: 1.35 }}
                           >
                             {feature.title}
                           </Typography>
+
                           <Typography
                             variant="body2"
                             color="text.secondary"
-                            sx={{ lineHeight: 1.55, fontSize: "0.9rem" }}
+                            sx={{ lineHeight: 1.6, fontSize: "0.9rem" }}
                           >
                             {feature.description}
                           </Typography>
@@ -231,13 +244,16 @@ export default function HeroSection() {
                     disableElevation
                     endIcon={<ArrowForwardIcon />}
                     sx={(theme) => ({
-                      px: 3,
-                      py: 1.25,
+                      fontWeight: 600,
+                      px: 2.5,
+                      fontSize: "1rem",
+                      borderRadius: 5,
                       ...getPrimaryButtonShadow(theme),
                     })}
                   >
                     Começar agora
                   </Button>
+
                   <Button
                     onClick={scrollToBenefits}
                     variant="text"
@@ -245,6 +261,7 @@ export default function HeroSection() {
                     size="large"
                     endIcon={<ArrowForwardIcon />}
                     sx={{
+                      borderRadius: 2,
                       color: "text.secondary",
                       fontWeight: 500,
                       "&:hover": {
@@ -269,17 +286,15 @@ export default function HeroSection() {
               pt: { xs: 0, md: 2 },
             }}
           >
-            <FadeIn
-              delay={0.15}
+            <Box
               sx={{
                 width: "100%",
-                maxWidth: "none",
                 display: { xs: "none", md: "flex" },
                 justifyContent: "center",
               }}
             >
               <HeroMacbookMockup />
-            </FadeIn>
+            </Box>
           </Grid>
         </Grid>
       </Container>

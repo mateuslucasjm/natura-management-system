@@ -3,6 +3,14 @@ import type { SystemStyleObject } from "@mui/system";
 
 export const PRIMARY = "#EC6B20";
 
+export const landingPageFontSx: SystemStyleObject<Theme> = {
+  fontFamily: '"Inter", sans-serif',
+  fontWeight: 400,
+  "& *": {
+    fontFamily: "inherit",
+  },
+};
+
 export function getPrimaryButtonShadow(theme: Theme): SystemStyleObject<Theme> {
   if (theme.palette.mode !== "dark") {
     return { boxShadow: "none" };

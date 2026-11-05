@@ -24,11 +24,19 @@ export default function FeaturesSection() {
           <Grid container spacing={3}>
             {landingFeatures.map((block) => {
               const Icon = block.icon;
+
               return (
                 <Grid key={block.title} size={{ xs: 12, sm: 6, md: 4 }}>
                   <StaggerItem sx={{ height: "100%" }}>
                     <LandingCard>
-                      <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 2 }}>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 1.5,
+                          mb: 2,
+                        }}
+                      >
                         <Box
                           sx={{
                             p: 1,
@@ -40,11 +48,23 @@ export default function FeaturesSection() {
                         >
                           <Icon fontSize="small" />
                         </Box>
-                        <Typography variant="h6" fontWeight={700}>
+
+                        <Typography
+                          variant="h6"
+                          fontWeight={600}
+                          sx={{
+                            fontSize: "1rem",
+                            letterSpacing: "-0.015em",
+                          }}
+                        >
                           {block.title}
                         </Typography>
                       </Box>
-                      <Box component="ul" sx={{ m: 0, p: 0, listStyle: "none" }}>
+
+                      <Box
+                        component="ul"
+                        sx={{ m: 0, p: 0, listStyle: "none" }}
+                      >
                         {block.items.map((item) => (
                           <Box
                             component="li"
@@ -57,9 +77,22 @@ export default function FeaturesSection() {
                             }}
                           >
                             <CheckCircleOutlineIcon
-                              sx={{ fontSize: 18, color: "primary.main", mt: 0.2 }}
+                              sx={{
+                                fontSize: 18,
+                                color: "primary.main",
+                                mt: 0.2,
+                              }}
                             />
-                            <Typography variant="body2" color="text.secondary">
+
+                            <Typography
+                              variant="body2"
+                              color="text.secondary"
+                              sx={{
+                                fontSize: "0.85rem",
+                                fontWeight: 400,
+                                lineHeight: 1.6,
+                              }}
+                            >
                               {item}
                             </Typography>
                           </Box>

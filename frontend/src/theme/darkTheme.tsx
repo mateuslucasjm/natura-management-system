@@ -10,7 +10,7 @@ const darkTheme = createTheme({
     action: { selected: "#333", hover: "#24252A" },
   },
   typography: {
-    fontFamily: "'Folio', 'Inter', sans-serif", 
+    fontFamily: '"Plus Jakarta Sans", sans-serif',
   },
   components: {
     MuiButton: {

@@ -2,7 +2,10 @@ import LandingCard from "@/components/Landing/LandingCard";
 import { FadeInStagger, StaggerItem } from "@/components/Landing/LandingMotion";
 import SectionHeading from "@/components/Landing/SectionHeading";
 import { landingSteps } from "@/components/Landing/landingContent";
-import { landingSectionCompact, PRIMARY } from "@/components/Landing/landingStyles";
+import {
+  landingSectionCompact,
+  PRIMARY,
+} from "@/components/Landing/landingStyles";
 import { Box, Container, Grid, Typography } from "@mui/material";
 
 export default function HowItWorksSection() {
@@ -35,18 +38,41 @@ export default function HowItWorksSection() {
                         }}
                       />
                     )}
+
                     <Typography
                       variant="overline"
                       color="primary"
-                      fontWeight={800}
-                      sx={{ letterSpacing: "0.12em" }}
+                      fontWeight={600}
+                      sx={{
+                        letterSpacing: "0.1em",
+                        fontSize: "0.68rem",
+                      }}
                     >
                       Passo {step.step}
                     </Typography>
-                    <Typography variant="h6" fontWeight={700} sx={{ mt: 1, mb: 1 }}>
+
+                    <Typography
+                      variant="h6"
+                      fontWeight={600}
+                      sx={{
+                        mt: 1,
+                        mb: 1,
+                        fontSize: "1rem",
+                        letterSpacing: "-0.015em",
+                      }}
+                    >
                       {step.title}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" lineHeight={1.7}>
+
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{
+                        fontSize: "0.85rem",
+                        fontWeight: 400,
+                        lineHeight: 1.6,
+                      }}
+                    >
                       {step.description}
                     </Typography>
                   </LandingCard>

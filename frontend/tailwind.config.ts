@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        folio: ["Folio", "Inter", "sans-serif"], 
+        sans: ["Plus Jakarta Sans", "sans-serif"],
       },
     },
   },

@@ -10,7 +10,7 @@ const lightTheme = createTheme({
     action: { selected: "#333", hover: "#FFFFFF" },
   },
   typography: {
-    fontFamily: "'Folio', 'Inter', sans-serif", 
+    fontFamily: '"Plus Jakarta Sans", sans-serif',
   },
   components: {
     MuiButton: {

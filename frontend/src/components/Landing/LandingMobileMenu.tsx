@@ -1,3 +1,4 @@
+import AccessAccountIcon from "@/components/Landing/AccessAccountIcon";
 import { landingNavLinks } from "@/components/Landing/landingContent";
 import {
   getLandingHeaderOffset,
@@ -5,7 +6,6 @@ import {
   PRIMARY,
 } from "@/components/Landing/landingStyles";
 import CloseIcon from "@mui/icons-material/Close";
-import AccessAccountIcon from "@/components/Landing/AccessAccountIcon";
 import MenuIcon from "@mui/icons-material/Menu";
 import PersonAddOutlinedIcon from "@mui/icons-material/PersonAddOutlined";
 import {
@@ -39,7 +39,13 @@ interface LandingMobileMenuProps {
   onClose: () => void;
 }
 
-export function LandingMenuToggle({ open, onToggle }: { open: boolean; onToggle: () => void }) {
+export function LandingMenuToggle({
+  open,
+  onToggle,
+}: {
+  open: boolean;
+  onToggle: () => void;
+}) {
   return (
     <IconButton
       aria-label={open ? "Fechar menu" : "Abrir menu"}
@@ -47,15 +53,12 @@ export function LandingMenuToggle({ open, onToggle }: { open: boolean; onToggle:
       onClick={onToggle}
       sx={{
         ml: 0.5,
-        border: "1px solid",
-        borderColor: open ? "primary.main" : "divider",
-        bgcolor: open ? `${PRIMARY}14` : "background.paper",
-        color: open ? "primary.main" : "text.primary",
-        transition: "all 0.25s ease",
+        color: "text.primary",
+        borderRadius: 2,
+        transition: "all 0.2s ease",
         "&:hover": {
-          borderColor: "primary.main",
-          bgcolor: `${PRIMARY}18`,
           color: "primary.main",
+          bgcolor: `${PRIMARY}14`,
         },
       }}
     >
@@ -66,21 +69,21 @@ export function LandingMenuToggle({ open, onToggle }: { open: boolean; onToggle:
             initial={{ opacity: 0, rotate: -90 }}
             animate={{ opacity: 1, rotate: 0 }}
             exit={{ opacity: 0, rotate: 90 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.18 }}
             style={{ display: "flex" }}
           >
-            <CloseIcon />
+            <CloseIcon sx={{ fontSize: 23 }} />
           </motion.span>
         ) : (
           <motion.span
             key="menu"
-            initial={{ opacity: 0, rotate: 90 }}
-            animate={{ opacity: 1, rotate: 0 }}
-            exit={{ opacity: 0, rotate: -90 }}
-            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.18 }}
             style={{ display: "flex" }}
           >
-            <MenuIcon />
+            <MenuIcon sx={{ fontSize: 23 }} />
           </motion.span>
         )}
       </AnimatePresence>
@@ -102,6 +105,7 @@ export default function LandingMobileMenu({
 
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+
     return () => {
       document.body.style.overflow = prev;
     };
@@ -120,7 +124,10 @@ export default function LandingMobileMenu({
       ModalProps={{ keepMounted: true }}
       slotProps={{
         backdrop: {
-          sx: { backdropFilter: "blur(4px)", bgcolor: "rgba(0,0,0,0.35)" },
+          sx: {
+            backdropFilter: "blur(4px)",
+            bgcolor: "rgba(0,0,0,0.35)",
+          },
         },
       }}
       PaperProps={{
@@ -147,7 +154,11 @@ export default function LandingMobileMenu({
           component={RouterLink}
           to="/"
           onClick={onClose}
-          sx={{ display: "flex", alignItems: "center", textDecoration: "none" }}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            textDecoration: "none",
+          }}
         >
           <Box
             component="img"
@@ -156,12 +167,16 @@ export default function LandingMobileMenu({
             sx={{ height: 40, width: "auto" }}
           />
         </Box>
+
         <IconButton
           aria-label="Fechar menu"
           onClick={onClose}
           sx={{
             color: "text.secondary",
-            "&:hover": { color: "primary.main", bgcolor: `${PRIMARY}14` },
+            "&:hover": {
+              color: "primary.main",
+              bgcolor: `${PRIMARY}14`,
+            },
           }}
         >
           <CloseIcon />
@@ -176,6 +191,7 @@ export default function LandingMobileMenu({
         >
           Navegação
         </Typography>
+
         <List disablePadding sx={{ mt: 0.5 }}>
           {landingNavLinks.map((link, index) => (
             <ListItemButton
@@ -188,7 +204,9 @@ export default function LandingMobileMenu({
                 transition: "all 0.2s ease",
                 "&:hover": {
                   bgcolor: `${PRIMARY}14`,
-                  "& .MuiListItemText-primary": { color: "primary.main" },
+                  "& .MuiListItemText-primary": {
+                    color: "primary.main",
+                  },
                 },
               }}
             >
@@ -199,7 +217,12 @@ export default function LandingMobileMenu({
                   fontSize: "1rem",
                 }}
               />
-              <Typography variant="caption" color="text.disabled" sx={{ mr: 0.5 }}>
+
+              <Typography
+                variant="caption"
+                color="text.disabled"
+                sx={{ mr: 0.5 }}
+              >
                 {String(index + 1).padStart(2, "0")}
               </Typography>
             </ListItemButton>
@@ -209,13 +232,20 @@ export default function LandingMobileMenu({
 
       <Box sx={{ px: 2.5, pb: 3, pt: 1 }}>
         <Divider sx={{ mb: 2 }} />
+
         <Typography
           variant="overline"
           color="text.secondary"
-          sx={{ display: "block", mb: 1.5, fontWeight: 700, letterSpacing: "0.1em" }}
+          sx={{
+            display: "block",
+            mb: 1.5,
+            fontWeight: 700,
+            letterSpacing: "0.1em",
+          }}
         >
           Sua conta
         </Typography>
+
         <Button
           component={RouterLink}
           to="/auth/login"
@@ -224,10 +254,11 @@ export default function LandingMobileMenu({
           color="primary"
           startIcon={<AccessAccountIcon fontSize="small" />}
           onClick={onClose}
-          sx={{ mb: 1.25, py: 1.2, fontWeight: 600, borderRadius: 3 }}
+          sx={{ mb: 1.25, py: 1.2, fontWeight: 600, borderRadius: 5 }}
         >
           Acessar conta
         </Button>
+
         <Button
           component={RouterLink}
           to="/auth/register"
@@ -240,7 +271,7 @@ export default function LandingMobileMenu({
           sx={(theme) => ({
             py: 1.2,
             fontWeight: 600,
-            borderRadius: 3,
+            borderRadius: 5,
             ...getPrimaryButtonShadow(theme),
           })}
         >

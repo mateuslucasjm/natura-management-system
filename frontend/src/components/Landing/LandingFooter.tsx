@@ -1,13 +1,5 @@
 import { landingFooter } from "@/components/Landing/landingContent";
-import {
-  Box,
-  Container,
-  Divider,
-  Grid,
-  Link,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Box, Container, Divider, Grid, Link, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 
 function FooterAnchor({
@@ -31,13 +23,14 @@ function FooterAnchor({
       href={href}
       onClick={handleClick}
       underline="hover"
-      color="text.secondary"
       sx={{
         display: "block",
         py: 0.5,
-        fontSize: "0.9rem",
+        fontSize: "0.85rem",
+        fontWeight: 400,
+        color: "rgba(255,255,255,0.65)",
         transition: "color 0.2s",
-        "&:hover": { color: "primary.main" },
+        "&:hover": { color: "#ffffff" },
       }}
     >
       {children}
@@ -47,21 +40,16 @@ function FooterAnchor({
 
 export default function LandingFooter() {
   const year = new Date().getFullYear();
-  const theme = useTheme();
 
   return (
     <Box
       component="footer"
       sx={{
-        mt: 6,
         pt: { xs: 8, md: 10 },
         pb: 5,
-        bgcolor: "background.paper",
-        borderTop: "1px solid",
-        borderColor:
-          theme.palette.mode === "dark"
-            ? "rgba(255,255,255,0.08)"
-            : "rgba(0,0,0,0.06)",
+        bgcolor: "#000000",
+        color: "#ffffff",
+        borderTop: "1px solid rgba(255,255,255,0.08)",
       }}
     >
       <Container maxWidth="lg">
@@ -73,19 +61,30 @@ export default function LandingFooter() {
               alt="Natura App"
               sx={{ height: 44, mb: 2 }}
             />
+
             <Typography
               variant="body2"
-              color="text.secondary"
-              sx={{ lineHeight: 1.8, maxWidth: 400 }}
+              sx={{
+                fontSize: "0.85rem",
+                fontWeight: 400,
+                lineHeight: 1.7,
+                maxWidth: 400,
+                color: "rgba(255,255,255,0.65)",
+              }}
             >
               {landingFooter.tagline}
             </Typography>
           </Grid>
 
           <Grid size={{ xs: 6, sm: 4, md: 2.5 }}>
-            <Typography variant="subtitle2" fontWeight={700} gutterBottom>
+            <Typography
+              variant="subtitle2"
+              fontWeight={600}
+              sx={{ fontSize: "0.85rem", mb: 1, color: "#ffffff" }}
+            >
               {landingFooter.product.title}
             </Typography>
+
             {landingFooter.product.links.map((link) => (
               <FooterAnchor key={link.label} href={link.href}>
                 {link.label}
@@ -94,21 +93,27 @@ export default function LandingFooter() {
           </Grid>
 
           <Grid size={{ xs: 6, sm: 4, md: 2.5 }}>
-            <Typography variant="subtitle2" fontWeight={700} gutterBottom>
+            <Typography
+              variant="subtitle2"
+              fontWeight={600}
+              sx={{ fontSize: "0.85rem", mb: 1, color: "#ffffff" }}
+            >
               {landingFooter.account.title}
             </Typography>
+
             {landingFooter.account.links.map((link) => (
               <Link
                 key={link.label}
                 component={RouterLink}
                 to={link.to}
                 underline="hover"
-                color="text.secondary"
                 sx={{
                   display: "block",
                   py: 0.5,
-                  fontSize: "0.9rem",
-                  "&:hover": { color: "primary.main" },
+                  fontSize: "0.85rem",
+                  fontWeight: 400,
+                  color: "rgba(255,255,255,0.65)",
+                  "&:hover": { color: "#ffffff" },
                 }}
               >
                 {link.label}
@@ -117,15 +122,24 @@ export default function LandingFooter() {
           </Grid>
 
           <Grid size={{ xs: 12, sm: 4, md: 2 }}>
-            <Typography variant="subtitle2" fontWeight={700} gutterBottom>
+            <Typography
+              variant="subtitle2"
+              fontWeight={600}
+              sx={{ fontSize: "0.85rem", mb: 1, color: "#ffffff" }}
+            >
               {landingFooter.modules.title}
             </Typography>
+
             {landingFooter.modules.items.map((item) => (
               <Typography
                 key={item}
                 variant="body2"
-                color="text.secondary"
-                sx={{ py: 0.5 }}
+                sx={{
+                  py: 0.5,
+                  fontSize: "0.85rem",
+                  fontWeight: 400,
+                  color: "rgba(255,255,255,0.65)",
+                }}
               >
                 {item}
               </Typography>
@@ -133,7 +147,7 @@ export default function LandingFooter() {
           </Grid>
         </Grid>
 
-        <Divider sx={{ my: 4 }} />
+        <Divider sx={{ my: 4, borderColor: "rgba(255,255,255,0.15)" }} />
 
         <Box
           sx={{
@@ -144,10 +158,25 @@ export default function LandingFooter() {
             gap: 2,
           }}
         >
-          <Typography variant="body2" color="text.secondary">
+          <Typography
+            variant="body2"
+            sx={{
+              fontSize: "0.8rem",
+              fontWeight: 400,
+              color: "rgba(255,255,255,0.55)",
+            }}
+          >
             © {year} Natura App. Todos os direitos reservados.
           </Typography>
-          <Typography variant="caption" color="text.secondary">
+
+          <Typography
+            variant="caption"
+            sx={{
+              fontSize: "0.75rem",
+              fontWeight: 400,
+              color: "rgba(255,255,255,0.55)",
+            }}
+          >
             Controle de vendas, estoque e clientes para pequenos consultores.
           </Typography>
         </Box>
