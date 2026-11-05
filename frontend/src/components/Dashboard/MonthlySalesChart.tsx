@@ -1,8 +1,8 @@
+import { usePeriod } from "@/contexts/periodContext";
 import {
   formatMonthlyStatsForChart,
   getMockMonthlyStatsFormatted,
 } from "@/mocks/dashboardMock";
-import { usePeriod } from "@/contexts/periodContext";
 import saleService from "@/services/saleService";
 import { isDashboardMockImmediate } from "@/utils/withDashboardMock";
 import { Box, Typography, useTheme } from "@mui/material";
@@ -28,7 +28,7 @@ export default function MonthlySalesChart() {
   const theme = useTheme();
   const { period } = usePeriod();
   const [data, setData] = useState<MonthlyStat[]>(() =>
-    isDashboardMockImmediate() ? getMockMonthlyStatsFormatted(period) : []
+    isDashboardMockImmediate() ? getMockMonthlyStatsFormatted(period) : [],
   );
 
   useEffect(() => {
@@ -57,10 +57,7 @@ export default function MonthlySalesChart() {
           justifyContent: "center",
         }}
       >
-        <Typography
-          variant="h4"
-          sx={{ color: theme.palette.text.secondary }}
-        >
+        <Typography variant="h4" sx={{ color: theme.palette.text.secondary }}>
           Você ainda não possui vendas!
         </Typography>
       </Box>
@@ -90,8 +87,8 @@ export default function MonthlySalesChart() {
           />
 
           <Tooltip
-            formatter={(value: number) =>
-              value.toLocaleString("pt-BR", {
+            formatter={(value) =>
+              Number(value ?? 0).toLocaleString("pt-BR", {
                 style: "currency",
                 currency: "BRL",
               })
