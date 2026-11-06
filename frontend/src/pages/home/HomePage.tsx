@@ -3,7 +3,8 @@ import ExpiringStockCard from "@/components/Dashboard/ExpiringStockCard";
 import MonthlySalesChart from "@/components/Dashboard/MonthlySalesChart";
 import PeriodSelector from "@/components/Dashboard/PeriodSelector";
 import SalesCard from "@/components/Dashboard/SalesCard";
-import PageTitle from "@/components/PageTitle/PageTitle";
+import Header from "@/components/Header";
+import ProfileModal from "@/components/Modal/ProfileModal";
 import { usePeriod } from "@/contexts/periodContext";
 import {
   mockOverdueSales,
@@ -15,12 +16,9 @@ import {
 import productItemService from "@/services/productItemService";
 import saleService from "@/services/saleService";
 import { isDashboardMockImmediate } from "@/utils/withDashboardMock";
-import { Box, Grid, Typography, useTheme } from "@mui/material";
-import { useEffect, useState } from "react";
-
-import ProfileModal from "@/components/Modal/ProfileModal";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { IconButton } from "@mui/material";
+import { Box, Grid, IconButton, Typography, useTheme } from "@mui/material";
+import { useEffect, useState } from "react";
 
 function HomePage() {
   const { period } = usePeriod();
@@ -29,32 +27,34 @@ function HomePage() {
   const mockImmediate = isDashboardMockImmediate();
 
   const [totalSalesAmount, setTotalSalesAmount] = useState<number | null>(
-    mockImmediate ? mockTotalSalesAmount : null
+    mockImmediate ? mockTotalSalesAmount : null,
   );
+
   const [totalSalesProfit, setTotalSalesProfit] = useState<number | null>(
-    mockImmediate ? mockTotalSalesProfit : null
+    mockImmediate ? mockTotalSalesProfit : null,
   );
+
   const [totalStockValue, setTotalStockValue] = useState<number | null>(
-    mockImmediate ? mockTotalStockValue : null
+    mockImmediate ? mockTotalStockValue : null,
   );
 
   const [profileOpen, setProfileOpen] = useState(false);
 
   const formatCurrency = (value: number) =>
-    value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+    value.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
 
   useEffect(() => {
     const loadDashboardData = async () => {
       try {
-        const [
-          { totalSalesAmount },
-          { totalSalesProfit },
-          totalStockValue,
-        ] = await Promise.all([
-          saleService.getTotalSalesAmount(period),
-          saleService.getTotalSalesProfit(period),
-          productItemService.getTotalStockValue(),
-        ]);
+        const [{ totalSalesAmount }, { totalSalesProfit }, totalStockValue] =
+          await Promise.all([
+            saleService.getTotalSalesAmount(period),
+            saleService.getTotalSalesProfit(period),
+            productItemService.getTotalStockValue(),
+          ]);
 
         setTotalSalesAmount(totalSalesAmount);
         setTotalSalesProfit(totalSalesProfit);
@@ -71,7 +71,9 @@ function HomePage() {
     <Typography
       variant="h5"
       fontWeight="bold"
-      sx={{ color: theme.palette.mode === "dark" ? "#bbb" : "#EC6B20" }}
+      sx={{
+        color: theme.palette.mode === "dark" ? "#bbb" : "#EC6B20",
+      }}
     >
       {children}
     </Typography>
@@ -79,20 +81,19 @@ function HomePage() {
 
   return (
     <Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          mb: 2,
-        }}
-      >
-        <PageTitle title="Home" />
-
-        <IconButton color="primary" onClick={() => setProfileOpen(true)}>
-          <AccountCircleIcon fontSize="large" />
-        </IconButton>
-      </Box>
+      <Header
+        title="Home"
+        sx={{ mb: 0, mt: 0 }}
+        rightContent={
+          <IconButton
+            color="primary"
+            onClick={() => setProfileOpen(true)}
+            aria-label="Abrir perfil"
+          >
+            <AccountCircleIcon fontSize="large" />
+          </IconButton>
+        }
+      />
 
       <Grid container spacing={2} sx={{ mt: 2 }}>
         <Grid size={{ xs: 12, md: 4 }}>
@@ -124,18 +125,24 @@ function HomePage() {
             </ValueTypography>
           </DashboardCard>
         </Grid>
-
+        
         <Grid size={{ xs: 12, md: 8 }}>
           <DashboardCard
             title={
               <Box
                 sx={{
                   display: "flex",
+                  flexDirection: { xs: "column", md: "row" },
                   justifyContent: "space-between",
-                  alignItems: "start",
+                  alignItems: { xs: "stretch", md: "start" },
+                  gap: { xs: 1.5, md: 0 },
+                  width: "100%",
                 }}
               >
-                Gráfico de Vendas
+                <Typography variant="h6" fontWeight={600}>
+                  Gráfico de Vendas
+                </Typography>
+
                 <PeriodSelector />
               </Box>
             }
@@ -168,6 +175,7 @@ function HomePage() {
           </DashboardCard>
         </Grid>
       </Grid>
+
       <ProfileModal open={profileOpen} onClose={() => setProfileOpen(false)} />
     </Box>
   );

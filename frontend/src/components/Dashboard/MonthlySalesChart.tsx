@@ -55,9 +55,17 @@ export default function MonthlySalesChart() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          textAlign: "center",
+          px: 2,
         }}
       >
-        <Typography variant="h4" sx={{ color: theme.palette.text.secondary }}>
+        <Typography
+          variant="h4"
+          sx={{
+            color: theme.palette.text.secondary,
+            fontSize: { xs: "1.25rem", sm: "2.125rem" },
+          }}
+        >
           Você ainda não possui vendas!
         </Typography>
       </Box>

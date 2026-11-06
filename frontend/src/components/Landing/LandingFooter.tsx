@@ -28,9 +28,9 @@ function FooterAnchor({
         py: 0.5,
         fontSize: "0.85rem",
         fontWeight: 400,
-        color: "rgba(255,255,255,0.65)",
+        color: "text.secondary",
         transition: "color 0.2s",
-        "&:hover": { color: "#ffffff" },
+        "&:hover": { color: "primary.main" },
       }}
     >
       {children}
@@ -45,14 +45,21 @@ export default function LandingFooter() {
     <Box
       component="footer"
       sx={{
-        pt: { xs: 8, md: 10 },
+        pt: { xs: 2, sm:8 },
         pb: 5,
-        bgcolor: "#000000",
-        color: "#ffffff",
-        borderTop: "1px solid rgba(255,255,255,0.08)",
+        bgcolor: "background",
+        color: "text.primary",
+        borderTop: 1,
+        borderColor: "divider",
+        transition: "background-color 0.2s, color 0.2s",
       }}
     >
-      <Container maxWidth="lg">
+      <Container
+        maxWidth="lg"
+        sx={{
+          my: { xs: 2, md: 0 },
+        }}
+      >
         <Grid container spacing={4}>
           <Grid size={{ xs: 12, md: 5 }}>
             <Box
@@ -69,7 +76,7 @@ export default function LandingFooter() {
                 fontWeight: 400,
                 lineHeight: 1.7,
                 maxWidth: 400,
-                color: "rgba(255,255,255,0.65)",
+                color: "text.secondary",
               }}
             >
               {landingFooter.tagline}
@@ -80,7 +87,7 @@ export default function LandingFooter() {
             <Typography
               variant="subtitle2"
               fontWeight={600}
-              sx={{ fontSize: "0.85rem", mb: 1, color: "#ffffff" }}
+              sx={{ fontSize: "0.85rem", mb: 1 }}
             >
               {landingFooter.product.title}
             </Typography>
@@ -96,7 +103,7 @@ export default function LandingFooter() {
             <Typography
               variant="subtitle2"
               fontWeight={600}
-              sx={{ fontSize: "0.85rem", mb: 1, color: "#ffffff" }}
+              sx={{ fontSize: "0.85rem", mb: 1 }}
             >
               {landingFooter.account.title}
             </Typography>
@@ -112,8 +119,8 @@ export default function LandingFooter() {
                   py: 0.5,
                   fontSize: "0.85rem",
                   fontWeight: 400,
-                  color: "rgba(255,255,255,0.65)",
-                  "&:hover": { color: "#ffffff" },
+                  color: "text.secondary",
+                  "&:hover": { color: "primary.main" },
                 }}
               >
                 {link.label}
@@ -125,7 +132,7 @@ export default function LandingFooter() {
             <Typography
               variant="subtitle2"
               fontWeight={600}
-              sx={{ fontSize: "0.85rem", mb: 1, color: "#ffffff" }}
+              sx={{ fontSize: "0.85rem", mb: 1 }}
             >
               {landingFooter.modules.title}
             </Typography>
@@ -138,7 +145,7 @@ export default function LandingFooter() {
                   py: 0.5,
                   fontSize: "0.85rem",
                   fontWeight: 400,
-                  color: "rgba(255,255,255,0.65)",
+                  color: "text.secondary",
                 }}
               >
                 {item}
@@ -147,7 +154,7 @@ export default function LandingFooter() {
           </Grid>
         </Grid>
 
-        <Divider sx={{ my: 4, borderColor: "rgba(255,255,255,0.15)" }} />
+        <Divider sx={{ my: 4, borderColor: "divider" }} />
 
         <Box
           sx={{
@@ -163,7 +170,7 @@ export default function LandingFooter() {
             sx={{
               fontSize: "0.8rem",
               fontWeight: 400,
-              color: "rgba(255,255,255,0.55)",
+              color: "text.secondary",
             }}
           >
             © {year} Natura App. Todos os direitos reservados.
@@ -174,7 +181,7 @@ export default function LandingFooter() {
             sx={{
               fontSize: "0.75rem",
               fontWeight: 400,
-              color: "rgba(255,255,255,0.55)",
+              color: "text.secondary",
             }}
           >
             Controle de vendas, estoque e clientes para pequenos consultores.

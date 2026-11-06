@@ -126,7 +126,7 @@ export function DataTableSale<T extends Record<string, any>>({
         },
       }}
       muiPaginationProps={{
-        rowsPerPageOptions: [],
+        rowsPerPageOptions: [3],
         showFirstButton: false,
         showLastButton: false,
       }}

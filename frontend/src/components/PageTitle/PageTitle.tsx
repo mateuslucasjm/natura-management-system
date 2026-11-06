@@ -5,9 +5,17 @@ interface PageTitleProps {
   variant?: TypographyProps["variant"];
 }
 
-export default function PageTitle({ title, variant = "h4" }: PageTitleProps) {
+export default function PageTitle({
+  title,
+  variant = "h4",
+}: PageTitleProps) {
   return (
-    <Typography variant={variant} component="h5" color="primary.main">
+    <Typography
+      variant={variant}
+      component="h5"
+      fontWeight="semibold"
+      color="primary.main"
+    >
       {title}
     </Typography>
   );

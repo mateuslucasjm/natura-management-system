@@ -77,12 +77,12 @@ export function DataTable<T extends Record<string, any>>({
       enableStickyHeader
       muiTableContainerProps={{
         sx: {
-          maxHeight: maxHeight || "none",
-          display: "flex",
-          flexDirection: "column",
+          height: maxHeight ?? "calc(100dvh - 250px)",
+          overflowY: "auto",
+          overflowX: "auto",
           backgroundColor: theme.palette.background.paper,
-          borderRadius: 0,     
-          boxShadow: "none",    
+          borderRadius: 0,
+          boxShadow: "none",
         },
       }}
       muiTablePaperProps={{
@@ -93,14 +93,17 @@ export function DataTable<T extends Record<string, any>>({
           flex: 1,
           display: "flex",
           flexDirection: "column",
-          border: "none",     
+          border: "none",
         },
       }}
       muiTableHeadProps={{
         sx: { backgroundColor: theme.palette.background.paper },
       }}
       muiTableHeadCellProps={{
-        sx: { backgroundColor: theme.palette.background.paper, fontWeight: "bold" },
+        sx: {
+          backgroundColor: theme.palette.background.paper,
+          fontWeight: "bold",
+        },
       }}
       muiTableBodyProps={{
         sx: {
@@ -147,4 +150,3 @@ export function DataTable<T extends Record<string, any>>({
     />
   );
 }
-

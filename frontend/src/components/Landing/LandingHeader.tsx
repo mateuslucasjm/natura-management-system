@@ -1,15 +1,11 @@
 import AccessAccountIcon from "@/components/Landing/AccessAccountIcon";
+import LandingLogo from "@/components/Landing/LandingLogo";
 import { landingNavLinks } from "@/components/Landing/landingContent";
-import LandingMobileMenu, {
-  LandingMenuToggle,
-} from "@/components/Landing/LandingMobileMenu";
 import {
   getGlassHeader,
   getHeaderScrollShadow,
   getLandingHeaderOffset,
-  getPrimaryButtonShadow,
   landingHeaderToolbarSx,
-  landingNavButtonSx,
 } from "@/components/Landing/landingStyles";
 import {
   AppBar,
@@ -21,7 +17,6 @@ import {
   useScrollTrigger,
   useTheme,
 } from "@mui/material";
-import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 function scrollToSection(id: string, offset: number) {
@@ -37,22 +32,18 @@ export default function LandingHeader() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-  const [drawerOpen, setDrawerOpen] = useState(false);
-
-  const scrolled = useScrollTrigger({
+  const headerScrolled = useScrollTrigger({
     disableHysteresis: true,
     threshold: 24,
   });
 
-  const headerOffset = getLandingHeaderOffset(scrolled, isMobile);
+  if (isMobile) return null;
 
-  const toolbarSx = scrolled
+  const headerOffset = getLandingHeaderOffset(headerScrolled, false);
+
+  const toolbarSx = headerScrolled
     ? landingHeaderToolbarSx.scrolled
     : landingHeaderToolbarSx.hero;
-
-  const toggleMenu = () => {
-    setDrawerOpen((prev) => !prev);
-  };
 
   const navItem = (link: (typeof landingNavLinks)[0]) => (
     <Button
@@ -62,6 +53,9 @@ export default function LandingHeader() {
         color: "text.primary",
         fontWeight: 500,
         fontSize: "1rem",
+        py: 0,
+        my: 0,
+        minHeight: "unset",
         "&:hover": {
           color: "primary.main",
           bgcolor: "transparent",
@@ -73,150 +67,104 @@ export default function LandingHeader() {
   );
 
   return (
-    <>
-      <AppBar
-        position="fixed"
-        elevation={0}
-        color="transparent"
-        sx={(theme) => ({
-          ...getGlassHeader(theme, scrolled),
-          top: 0,
-          left: 0,
-          right: 0,
-          width: "100%",
-          zIndex: theme.zIndex.appBar,
-          transition:
-            "background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease",
-          boxShadow: getHeaderScrollShadow(theme, scrolled),
-        })}
+    <AppBar
+      position="fixed"
+      elevation={0}
+      color="transparent"
+      sx={(theme) => ({
+        ...getGlassHeader(theme, headerScrolled),
+        top: 0,
+        left: 0,
+        right: 0,
+        width: "100%",
+        zIndex: theme.zIndex.appBar,
+        transition:
+          "background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease",
+        boxShadow: getHeaderScrollShadow(theme, headerScrolled),
+      })}
+    >
+      <Container
+        maxWidth="lg"
+        sx={{
+          px: headerScrolled
+            ? { xs: 2.5, sm: 4, md: 6, lg: 8 }
+            : { xs: 3, sm: 5, md: 8, lg: 10 },
+          transition: "padding 0.3s ease",
+        }}
       >
-        <Container
-          maxWidth="lg"
+        <Toolbar
+          disableGutters
           sx={{
-            px: scrolled
-              ? { xs: 2.5, sm: 4, md: 6, lg: 8 }
-              : { xs: 3, sm: 5, md: 8, lg: 10 },
-            transition: "padding 0.3s ease",
+            ...toolbarSx,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: { md: 15, lg: 15 },
+            pb: "0 !important",
+            mb: 2,
+            minHeight: "unset",
+            transition: "padding 0.3s ease, min-height 0.3s ease",
           }}
         >
-          <Toolbar
-            disableGutters
-            sx={{
-              ...toolbarSx,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: isMobile ? "space-between" : "center",
-              gap: isMobile ? 2 : { md: 15, lg: 15 },
-              transition: "padding 0.3s ease, min-height 0.3s ease",
-            }}
-          >
-            <Box
+          <LandingLogo height={40} />
+
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: -0.5 }}>
+            {landingNavLinks.map(navItem)}
+          </Box>
+
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Button
               component={RouterLink}
-              to="/"
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                textDecoration: "none",
-                flexShrink: 0,
-              }}
+              to="/auth/login"
+              startIcon={<AccessAccountIcon fontSize="small" />}
+              variant="contained"
+              color="primary"
+              disableElevation
+              sx={(theme) => ({
+                borderRadius: 50,
+                px: 3.2,
+                minWidth: 120,
+                fontSize: "0.9rem",
+                fontWeight: 600,
+                textTransform: "none",
+                color: "#fff",
+                letterSpacing: "0.01em",
+                boxShadow: `0 4px 14px ${theme.palette.primary.main}40`,
+                transition: "all 0.25s ease",
+                "& .MuiButton-startIcon": {
+                  mr: 1,
+                },
+                "&:hover": {
+                  bgcolor: "primary.dark",
+                  transform: "translateY(-2px)",
+                  boxShadow: `0 7px 18px ${theme.palette.primary.main}50`,
+                },
+                "&:active": {
+                  transform: "translateY(0)",
+                },
+              })}
             >
-              <Box
-                component="img"
-                src="/logo-natura.png"
-                alt="Natura App"
-                sx={{
-                  height: isMobile ? 38 : 40,
-                  width: "auto",
-                }}
-              />
-            </Box>
+              Entrar
+            </Button>
+          </Box>
+        </Toolbar>
+      </Container>
 
-            {!isMobile && (
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 1,
-                  flexShrink: 0,
-                }}
-              >
-                {landingNavLinks.map(navItem)}
-              </Box>
-            )}
-
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: 2,
-                flexShrink: 0,
-                ml: isMobile ? "auto" : 0,
-              }}
-            >
-              {!isMobile && (
-                <>
-                  <Button
-                    component={RouterLink}
-                    to="/auth/login"
-                    startIcon={<AccessAccountIcon fontSize="small" />}
-                    sx={{
-                      ...landingNavButtonSx,
-                      borderRadius: 5,
-                    }}
-                  >
-                    Acessar conta
-                  </Button>
-
-                  <Button
-                    component={RouterLink}
-                    to="/auth/register"
-                    variant="contained"
-                    color="primary"
-                    disableElevation
-                    sx={(theme) => ({
-                      fontWeight: 600,
-                      display: { xs: "none", sm: "inline-flex" },
-                      borderRadius: 5,
-                      ...getPrimaryButtonShadow(theme),
-                    })}
-                  >
-                    Criar conta
-                  </Button>
-                </>
-              )}
-
-              {isMobile && (
-                <>
-                  <Button
-                    component={RouterLink}
-                    to="/auth/register"
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    disableElevation
-                    sx={(theme) => ({
-                      fontWeight: 600,
-                      display: { xs: "none", sm: "inline-flex" },
-                      ...getPrimaryButtonShadow(theme),
-                    })}
-                  >
-                    Criar conta
-                  </Button>
-
-                  <LandingMenuToggle open={drawerOpen} onToggle={toggleMenu} />
-                </>
-              )}
-            </Box>
-          </Toolbar>
-        </Container>
-      </AppBar>
-
-      {isMobile && (
-        <LandingMobileMenu
-          open={drawerOpen}
-          onClose={() => setDrawerOpen(false)}
+      {!headerScrolled && (
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: 0,
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "calc(100% - 80px)",
+            maxWidth: 1200,
+            height: "0.5px",
+            bgcolor: "primary.main",
+            opacity: 0.08,
+          }}
         />
       )}
-    </>
+    </AppBar>
   );
 }

@@ -15,17 +15,16 @@ export default function LandingLayout({ children }: LandingLayoutProps) {
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
-        bgcolor: "background.default",
         ...landingPageFontSx,
       }}
     >
       <LandingHeader />
 
-      <Box component="main" sx={{ flex: 1 }}>
-        {children}
-      </Box>
+      <Box component="main">{children}</Box>
 
-      <LandingFooter />
+      <Box component="footer">
+        <LandingFooter />
+      </Box>
     </Box>
   );
 }

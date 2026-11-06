@@ -1,4 +1,5 @@
 import HeroMacbookMockup from "@/components/Landing/HeroMacbookMockup";
+import LandingLogo from "@/components/Landing/LandingLogo";
 import { FadeIn } from "@/components/Landing/LandingMotion";
 import {
   landingHero,
@@ -16,6 +17,7 @@ import {
   Container,
   Grid,
   Typography,
+  useMediaQuery,
   useTheme,
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
@@ -29,6 +31,7 @@ function scrollToBenefits() {
 export default function HeroSection() {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <Box
@@ -41,8 +44,22 @@ export default function HeroSection() {
         display: "flex",
         alignItems: "center",
         boxSizing: "border-box",
+        position: "relative",
       })}
     >
+      {isMobile && (
+        <Box
+          sx={{
+            position: "absolute",
+            top: 16,
+            left: 16,
+            zIndex: 10,
+          }}
+        >
+          <LandingLogo height={38} />
+        </Box>
+      )}
+
       {isDark && (
         <>
           <Box

@@ -19,6 +19,13 @@ export default function CreateButton({
       variant="outlined"
       color={color}
       onClick={onClick}
+      sx={{
+        minWidth: { xs: "auto", md: 120 },
+        px: { xs: 1.5, md: 2.5 },
+        py: { xs: 0.5, md: 1 },
+        fontSize: { xs: "0.75rem", md: "0.875rem" },
+        whiteSpace: "nowrap",
+      }}
     >
       {label}
     </Button>

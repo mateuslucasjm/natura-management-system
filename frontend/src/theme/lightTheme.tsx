@@ -3,11 +3,34 @@ import { createTheme } from "@mui/material/styles";
 const lightTheme = createTheme({
   palette: {
     mode: "light",
-    primary: { main: "#EC6B20" },
-    secondary: { main: "#555" },
-    background: { default: "#F7F8FA", paper: "#FFFFFF" },
-    text: { primary: "#1a1a1a", secondary: "#555" },
-    action: { selected: "#333", hover: "#FFFFFF" },
+    primary: {
+      main: "#D9570B",
+      light: "#F28A4B",
+      dark: "#A83D05",
+      contrastText: "#FFFFFF",
+    },
+    secondary: {
+      main: "#475569",
+      light: "#64748B",
+      dark: "#334155",
+      contrastText: "#FFFFFF",
+    },
+    background: {
+      default: "#F1F3F6",
+      paper: "#FFFFFF",
+    },
+    text: {
+      primary: "#172033",
+      secondary: "#596579",
+    },
+    divider: "#DCE1E8",
+    action: {
+      active: "#475569",
+      selected: "#FCE9DD",
+      hover: "#F1F3F6",
+      disabled: "#A0A8B5",
+      disabledBackground: "#E8EBF0",
+    },
   },
   typography: {
     fontFamily: '"Plus Jakarta Sans", sans-serif',
@@ -15,12 +38,32 @@ const lightTheme = createTheme({
   components: {
     MuiButton: {
       styleOverrides: {
-        root: { borderRadius: 8, textTransform: "none" },
+        root: {
+          borderRadius: 8,
+          textTransform: "none",
+          fontWeight: 600,
+        },
       },
     },
     MuiListItemButton: {
       styleOverrides: {
-        root: { borderRadius: 8 },
+        root: {
+          borderRadius: 8,
+          "&.Mui-selected": {
+            backgroundColor: "#FCE9DD",
+            color: "#B8470A",
+            "&:hover": {
+              backgroundColor: "#F8DCCB",
+            },
+          },
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundImage: "none",
+        },
       },
     },
   },

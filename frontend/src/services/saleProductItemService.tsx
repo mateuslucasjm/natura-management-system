@@ -1,15 +1,16 @@
 import useHttp from "@/services/useHttp";
 import type { SaleProductItem } from "@/types/saleProductItem";
+import axios from "axios";
 
 const saleProductItemService = {
   create: async (
-    saleProductItem: SaleProductItem
+    saleProductItem: SaleProductItem,
   ): Promise<SaleProductItem> => {
     try {
       const res = await useHttp.post("/sale-product-item", saleProductItem);
       return res.data;
     } catch (error) {
-      console.log("Erro ao criar items da venda", error);
+      console.log("Erro ao criar item da venda:", error);
       throw error;
     }
   },
@@ -19,23 +20,33 @@ const saleProductItemService = {
       const res = await useHttp.get(`/sale-product-item/${id}`);
       return res.data;
     } catch (error) {
-      console.log("Erro ao obter item da venda por ID", error);
+      console.log("Erro ao obter item da venda por ID:", error);
       throw error;
     }
   },
 
   update: async (
     id: number,
-    saleProductItem: SaleProductItem
+    saleProductItem: SaleProductItem,
   ): Promise<SaleProductItem> => {
     try {
+      console.log("ID do item:", id);
+      console.log("Dados enviados:", saleProductItem);
+
       const res = await useHttp.patch(
         `/sale-product-item/${id}`,
-        saleProductItem
+        saleProductItem,
       );
+
       return res.data;
     } catch (error) {
-      console.log("Erro ao editar items da venda", error);
+      if (axios.isAxiosError(error)) {
+        console.error("Status:", error.response?.status);
+        console.error("Resposta do backend:", error.response?.data);
+      } else {
+        console.error("Erro ao editar item da venda:", error);
+      }
+
       throw error;
     }
   },
@@ -44,7 +55,7 @@ const saleProductItemService = {
     try {
       await useHttp.delete(`/sale-product-item/${id}`);
     } catch (error) {
-      console.log("Erro ao remover itens da venda", error);
+      console.log("Erro ao remover item da venda:", error);
       throw error;
     }
   },

@@ -1,4 +1,5 @@
-import AuthBackLink from "@/components/Auth/AuthBackLink";
+import LandingLogo from "@/components/Landing/LandingLogo";
+import { getHeroGradientBg } from "@/components/Landing/landingStyles";
 import { AuthContext } from "@/contexts/authContext";
 import { getAuthErrorMessage } from "@/errors/auth/messages";
 import type { LoginFields } from "@/types/auth";
@@ -56,7 +57,8 @@ export default function Login() {
 
   return (
     <Box
-      sx={{
+      sx={(theme) => ({
+        ...getHeroGradientBg(theme),
         position: "relative",
         width: "100%",
         minHeight: "100dvh",
@@ -64,20 +66,31 @@ export default function Login() {
         justifyContent: "center",
         alignItems: "center",
         overflow: "hidden",
-        px: 2,
-      }}
+        px: { xs: 0, sm: 2 },
+      })}
     >
-      <AuthBackLink />
+      <Box
+        sx={{
+          position: "absolute",
+          top: { xs: 20, sm: 24 },
+          left: { xs: 20, sm: 32 },
+        }}
+      >
+        <LandingLogo height={38} />
+      </Box>
+
       <Box
         sx={{
           display: "flex",
           flexDirection: "column",
           gap: 2,
-          width: "90%",
-          maxWidth: 450,
-          padding: 5,
-          borderRadius: 5,
-          boxShadow: 3,
+          width: { xs: "100%", sm: "90%" },
+          maxWidth: { xs: "none", sm: 450 },
+          minHeight: { xs: "100dvh", sm: "auto" },
+          justifyContent: "center",
+          padding: { xs: 3, sm: 5 },
+          borderRadius: { xs: 0, sm: 5 },
+          boxShadow: { xs: 0, sm: 3 },
           backgroundColor: "background.paper",
           boxSizing: "border-box",
         }}
