@@ -1,17 +1,11 @@
 import { AuthProvider } from "@/contexts/authContext";
-import { useLayout } from "@/contexts/layoutContext";
-import { Box, CssBaseline, useMediaQuery, useTheme } from "@mui/material";
+import { Box, CssBaseline } from "@mui/material";
 import { Outlet, useLocation } from "react-router-dom";
 import Sidebar from "./Sidebar";
 
 const drawerWidth = 270;
 
 const Layout: React.FC = () => {
-  const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
-
-  const { sidebarCollapsed } = useLayout();
-
   const location = useLocation();
   const hideSidebarRoutes = ["/auth/login", "/auth/register"];
 
